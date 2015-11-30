@@ -1,3 +1,3 @@
 module ZOrder
-  Background = 0
+  Background, Body = *0..1
 end
