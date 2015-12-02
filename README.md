@@ -19,5 +19,5 @@ Load planets.txt:
 Load any other simulation:
 
 ```bash
-  $ ruby nbody.rb simulation_filename.txt
+  $ ruby nbody.rb simulation_name
 ```
