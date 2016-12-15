@@ -3,7 +3,7 @@ require_relative "z_order"
 
 class Body
 
-	DT = 20000
+	DT = 25000
 	G = 6.67408*10**-11
 
 	attr_reader :mass, :x, :y, :name
@@ -44,8 +44,8 @@ class Body
 		@f_y += total_force * dy / r
 	end
 
-	def draw(window)
-		x, y = window.coordinates_for(@x, @y)
+	def draw(universe)
+		x, y = universe.coordinates_for(@x, @y)
 		@image.draw_rot(x, y, ZOrder::Body, 0)
 	end
 
