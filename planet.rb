@@ -19,4 +19,4 @@ class Planet
 		imagex.draw(x, y, 0)
 	end
 
-end
+	
