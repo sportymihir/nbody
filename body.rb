@@ -88,8 +88,8 @@ class Body
         self.vel_x = velocity(ax, v0x)
         self.vel_y = velocity(ay, v0y)
 
-        self.x += distance(v0x, vel_x)
-        self.y -= distance(v0y, vel_y)
+        self.x += distance(vel_x, v0x)
+        self.y -= distance(vel_y, v0y)
     end
 
     def convert(radius)
