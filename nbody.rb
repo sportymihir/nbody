@@ -28,11 +28,12 @@ class NbodySimulation < Gosu::Window
     return bodies, radius
   end
 
-  def update
-    @bodies.each do |body|
-      body.set_coordinates(@bodies)
-    end
-  end
+  # def update
+  #   @bodies.each do |body|
+  #     if collide = true
+  #       bodies.push(Body.new) I was going to add in the z_velocity here. Ran out of time
+  #   end
+  # end
 
   def draw
     @background_image.draw(0, 0, ZOrder::Background)

@@ -5,9 +5,9 @@ require_relative "z_order"
 
 class Body
 
-	attr_accessor :x, :y, :vel_x, :vel_y, :mass, :image, :force, :g, :ax, :ay, :t
+	attr_accessor :x, :y, :vel_x, :vel_y, :mass, :image, :force, :g, :ax, :ay, :t #, vel_z
 
-	def initialize(x, y, vel_x, vel_y, mass, image)
+	def initialize(x, y, vel_x, vel_y, mass, image, vel_z)
         @x = x.to_f
         @y = y.to_f
         @vel_x = vel_x.to_f
@@ -15,11 +15,13 @@ class Body
         @mass = mass.to_f
         @image = image
         @force = [0.0, 0.0]
+        #@vel_z = vel_z.to_f 
 	end
 
     def set_force(f)
         self.force[0] = f[0]
         self.force[1] = f[1]
+        #self.force[2] = f[2]
     end
 
     def how_far(body1, body2)
@@ -54,6 +56,10 @@ class Body
     	return v0 + (a * 25000)
     end
 
+#   def z_velocity()
+# 	Over here, I need to make the bodies grow and shrink
+# 	based on their distance from the origin
+
     def calculate_force(bodies)
         f, fx, fy, dx, dy, r = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
         
@@ -64,11 +70,13 @@ class Body
             radius = length(self, body)
             dx = how_far(self, body)[0]
             dy = how_far(self, body)[1]
+#           dz = how_far(self, body)[2]
 
             f = forcex(mass, body.mass, radius)
 
             fx += force_directional(f, dx, radius)
             fy -= force_directional(f, dy, radius)
+#           fz += force_directional(f, dz, radius)
 
             f = 0.0
         end
@@ -87,15 +95,18 @@ class Body
 
         self.vel_x = velocity(ax, v0x)
         self.vel_y = velocity(ay, v0y)
+#       self.vel_z = velocity(az, v0z)
 
         self.x += distance(vel_x, v0x)
         self.y -= distance(vel_y, v0y)
+# 		self.z += distance(vel_z, v0z)
     end
 
     def convert(radius)
         x_coordinate = ((320 * @x) / radius) + 320
         y_coordinate = ((320 * @y) / radius) + 320
-        return x_coordinate, y_coordinate
+#       z_coordinate = ((320 * @y) / radius) + 320
+        return x_coordinate, y_coordinate #, z_coordinate
     end
 
     def draw(radius)
@@ -103,5 +114,14 @@ class Body
         x_coordinate, y_coordinate = convert(radius)
         image.draw(x_coordinate, y_coordinate, ZOrder::Body)
     end
+
+ #    def collide(body1, body2, radius)
+	# 	if (body2.x + body1.x) > self.x
+	# 		body2.x = body2.x / 2 && body1.x = body1.x / 2
+	# 	end
+	# end
+
+
+	
 
 end
